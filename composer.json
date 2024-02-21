@@ -1,0 +1,28 @@
+{
+    "name": "pharkasbence/simple-action",
+    "version": "dev-master",
+    "description": "Simple and lightweight action classes for Laravel",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bence Farkas",
+            "email": "bencefarkas89@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "illuminate/support": "^10.44"
+    },
+    "minimum-stability": "dev",
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist",
+        "optimize-autoloader": true
+    },
+    "autoload": {
+        "psr-4": {
+            "PharkasBence\\SimpleAction\\": "src/"
+        }
+    }
+}
