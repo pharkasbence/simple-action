@@ -5,7 +5,7 @@ namespace PharkasBence\SimpleAction;
 use Illuminate\Support\Str;
 
 // This must be in a trait because readonly properties are 
-// not allowed to initialize in base classes
+// not allowed to be initialized in base classes
 trait TransformProperties
 {
     private function init()
