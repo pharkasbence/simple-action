@@ -24,5 +24,12 @@
         "psr-4": {
             "PharkasBence\\SimpleAction\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "PharkasBence\\SimpleAction\\SimpleActionServiceProvider"
+            ]
+        }
     }
 }
