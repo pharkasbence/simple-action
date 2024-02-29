@@ -81,6 +81,8 @@ class CreateUser extends AbstractAction
             'username' => $data->getUsername(),
             'phone_number' => $data->getPhoneNumber(),
         ]);
+
+        // data can also be extracted by calling $data->toArray()
     }
 }
 ```
