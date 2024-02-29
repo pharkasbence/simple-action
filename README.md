@@ -19,7 +19,7 @@ class CreateUserData extends ActionData
     protected string $password;
     protected ?string $phoneNumber;
 
-    protected function rules(): array
+    protected function validationRules(): array
     {
         return [
             'email' => 'required|email',
@@ -29,7 +29,6 @@ class CreateUserData extends ActionData
         ];
     }
     
-    //optional
     protected function validationMessages(): array
     {
         'password' => 'Password cannot be empty',
