@@ -13,7 +13,7 @@ abstract class AbstractActionData
     {        
         $this->validatedData = $this->validate($data);
 
-        $this->init();
+        $this->hydrateProperties();
     }
 
     protected function validate(array $data): array
@@ -25,7 +25,7 @@ abstract class AbstractActionData
         return $validator->validated();
     }
 
-    protected function init()
+    protected function hydrateProperties()
     {
         foreach($this->validatedData as $key => $value) {
             $property = Str::camel($key);
