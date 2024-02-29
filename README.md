@@ -19,21 +19,6 @@ class CreateUserData extends ActionData
     protected string $password;
     protected ?string $phoneNumber;
 
-    protected function validationRules(): array
-    {
-        return [
-            'email' => 'required|email',
-            'password' => 'required|string',
-            'username' => 'required|string',
-            'phone_number' => 'string',
-        ];
-    }
-    
-    protected function validationMessages(): array
-    {
-        'password' => 'Password cannot be empty',
-    }
-
     public function getEmail(): string
     {
         return $this->email;
@@ -52,6 +37,21 @@ class CreateUserData extends ActionData
     public function getPhoneNumber(): ?string
     {
         return $this->phoneNumber;
+    }
+
+    protected function validationRules(): array
+    {
+        return [
+            'email' => 'required|email',
+            'password' => 'required|string',
+            'username' => 'required|string',
+            'phone_number' => 'string',
+        ];
+    }
+    
+    protected function validationMessages(): array
+    {
+        'password' => 'Password cannot be empty',
     }
 }
 ```
