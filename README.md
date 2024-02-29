@@ -30,7 +30,7 @@ class CreateUserData extends AbstractActionData
     }
     
     //optional
-    protected function messages(): array
+    protected function validationMessages(): array
     {
         'password' => 'Password cannot be empty',
     }

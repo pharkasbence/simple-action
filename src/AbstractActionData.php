@@ -18,7 +18,7 @@ abstract class AbstractActionData
 
     protected function validate(array $data): array
     {
-        $validator = Validator::make($data, $this->rules(), $this->messages());
+        $validator = Validator::make($data, $this->rules(), $this->validationMessages());
 
         $validator->validate();
 
@@ -38,7 +38,7 @@ abstract class AbstractActionData
 
     protected abstract function rules(): array;
     
-    protected function messages(): array
+    protected function validationMessages(): array
     {
         return [];
     }
