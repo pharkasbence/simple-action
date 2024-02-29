@@ -12,8 +12,6 @@ class ActionData
     public function __construct(protected array $data)
     {        
         $this->validate();
-
-        $this->hydrateProperties();
     }
 
     protected function validate(): void
@@ -21,17 +19,6 @@ class ActionData
         $validator = Validator::make($this->data, $this->validationRules(), $this->validationMessages());
 
         $validator->validate();
-    }
-
-    protected function hydrateProperties()
-    {
-        foreach ($this->data as $key => $value) {
-            $property = Str::camel($key);
-
-            if (property_exists(get_called_class(), $property)) {
-                $this->{$property} = $value;
-            }
-        }
     }
     
     protected function validationRules(): array

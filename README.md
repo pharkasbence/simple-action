@@ -14,44 +14,35 @@ use PharkasBence\SimpleAction\ActionData;
 
 class CreateUserData extends ActionData
 {
+    use HydratesProperties;
+
     protected string $email;
     protected string $username;
     protected string $password;
     protected ?string $phoneNumber;
 
-    public function getEmail(): string
+    public function __construct(array $data)
     {
-        return $this->email;
+        parent::__construct($data);
+
+        $this->hydrateProperties();
     }
 
-    public function getUsername(): string
-    {
-        return $this->username;
-    }
-
-    public function getPassword(): string
-    {
-        return $this->password;
-    }
-
-    public function getPhoneNumber(): ?string
-    {
-        return $this->phoneNumber;
-    }
-
+    // optional
     protected function validationRules(): array
     {
         return [
             'email' => 'required|email',
-            'password' => 'required|string',
+            'password' => 'required|string|min:6',
             'username' => 'required|string',
             'phone_number' => 'string',
         ];
     }
     
+    // optional
     protected function validationMessages(): array
     {
-        'password' => 'Password cannot be empty',
+        'password' => 'Passwords must be at least 6 characters in length',
     }
 }
 ```
@@ -72,13 +63,13 @@ class CreateUser extends Action
 
     public function handle(CreateUserData $data): User
     {
-        $passwordHash = Hash::make($data->getPassword());
+        $passwordHash = Hash::make($data->password);
         
         return User::create([
-            'email' => $data->getEmail(),
+            'email' => $data->email,
             'password' => $passwordHash,
-            'username' => $data->getUsername(),
-            'phone_number' => $data->getPhoneNumber(),
+            'username' => $data->username,
+            'phone_number' => $data->phoneNumber,
         ]);
 
         // data can also be extracted by calling $data->toArray()
@@ -99,6 +90,7 @@ class UserController extends Controller
 {
     public function store(Request $request)
     {
+        // request data fields need to be: email, username, password, phone_number
         CreateUser::run(new CreateUserData($request->all()));
         
         // ...
