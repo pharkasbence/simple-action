@@ -10,9 +10,9 @@
 ```php
 namespace App\Actions\ActionData\User;
 
-use PharkasBence\SimpleAction\AbstractActionData;
+use PharkasBence\SimpleAction\ActionData;
 
-class CreateUserData extends AbstractActionData
+class CreateUserData extends ActionData
 {
     protected string $email;
     protected string $username;
@@ -63,11 +63,11 @@ CreateUser.php
 namespace App\Actions\User;
 
 use Illuminate\Support\Facades\Hash;
-use App\Actions\AbstractAction;
+use App\Actions\Action;
 use App\Actions\ActionData\User\CreateUserData;
 use App\Models\User;
 
-class CreateUser extends AbstractAction
+class CreateUser extends Action
 {
     public function __construct(/*  */) {}
 

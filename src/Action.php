@@ -4,7 +4,7 @@ namespace PharkasBence\SimpleAction;
 
 use Illuminate\Support\Facades\App;
 
-abstract class AbstractAction 
+class Action 
 {
     private static function make()
     {

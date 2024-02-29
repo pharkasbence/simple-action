@@ -5,7 +5,7 @@ namespace PharkasBence\SimpleAction;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
-abstract class AbstractActionData
+class ActionData
 {
     protected array $validatedData;
 
@@ -18,7 +18,7 @@ abstract class AbstractActionData
 
     protected function validate(array $data): array
     {
-        $validator = Validator::make($data, $this->rules(), $this->validationMessages());
+        $validator = Validator::make($data, $this->validationRules(), $this->validationMessages());
 
         $validator->validate();
 
@@ -35,9 +35,12 @@ abstract class AbstractActionData
             }
         }
     }
-
-    protected abstract function rules(): array;
     
+    protected function validationRules(): array
+    {
+        return [];
+    }
+
     protected function validationMessages(): array
     {
         return [];
