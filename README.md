@@ -11,23 +11,13 @@
 namespace App\Actions\ActionData\User;
 
 use PharkasBence\SimpleAction\AbstractActionData;
-use PharkasBence\SimpleAction\TransformProperties;
 
 class CreateUserData extends AbstractActionData
 {
-    use TransformProperties;
-
-    public readonly int $email;
-    public readonly string password;
-    public readonly string $userName;
-    public readonly string phoneNumber;
- 
-    public function __construct(array $data)
-    {
-        parent::__construct($data);
-
-        $this->init();
-    }
+    protected string $email;
+    protected string $username;
+    protected string $password;
+    protected ?string $phoneNumber;
 
     protected function rules(): array
     {
@@ -43,6 +33,26 @@ class CreateUserData extends AbstractActionData
     protected function messages(): array
     {
         'password' => 'Password cannot be empty',
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function getUsername(): string
+    {
+        return $this->username;
+    }
+
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function getPhoneNumber(): ?string
+    {
+        return $this->phoneNumber;
     }
 }
 ```
@@ -63,13 +73,13 @@ class CreateUser extends AbstractAction
 
     public function handle(CreateUserData $data): User
     {
-        $passwordHash = Hash::make($data->password);
+        $passwordHash = Hash::make($data->getPassword());
         
         return User::create([
-            'email' => $data->email,
+            'email' => $data->getEmail(),
             'password' => $passwordHash,
-            'username' => $data->userName,
-            'phone_number' => $data->phoneNumber ?? null,
+            'username' => $data->getUsername(),
+            'phone_number' => $data->getPhoneNumber(),
         ]);
     }
 }
