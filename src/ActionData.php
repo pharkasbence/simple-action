@@ -9,25 +9,23 @@ class ActionData
 {
     protected array $validatedData;
 
-    public function __construct(array $data)
+    public function __construct(protected array $data)
     {        
-        $this->validatedData = $this->validate($data);
+        $this->validate();
 
         $this->hydrateProperties();
     }
 
-    protected function validate(array $data): array
+    protected function validate(): void
     {
-        $validator = Validator::make($data, $this->validationRules(), $this->validationMessages());
+        $validator = Validator::make($this->data, $this->validationRules(), $this->validationMessages());
 
         $validator->validate();
-
-        return $validator->validated();
     }
 
     protected function hydrateProperties()
     {
-        foreach($this->validatedData as $key => $value) {
+        foreach ($this->data as $key => $value) {
             $property = Str::camel($key);
 
             if (property_exists(get_called_class(), $property)) {
@@ -46,18 +44,19 @@ class ActionData
         return [];
     }
 
-    protected function toArray(?array $fields = null): array
+    protected function toArray(array $fields = []): array
     {
-        $result = [];  
-        $isFieldsEmpty = empty($fields);
+        $result = [];
 
-        foreach($this->validatedData as $key => $value) {
+        $arrayFields = $fields 
+            ? array_filter($this->data, fn ($key) => in_array($key, $fields), ARRAY_FILTER_USE_KEY)
+            : $this->data;
+
+        foreach ($arrayFields as $key => $value) {
             $property = Str::camel($key);
 
             if (property_exists(get_called_class(), $property)) {
-                if ($isFieldsEmpty || in_array($key, $fields)) {
-                    $result[$key] = $value;
-                }
+                $result[$key] = $value;
             }
         }
 
