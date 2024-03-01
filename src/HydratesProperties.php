@@ -6,7 +6,8 @@ use Illuminate\Support\Str;
 
 trait HydratesProperties
 {
-    // this has to be in a trait because readonly properties are not allowed to initialize in base classes
+    // this has to be in a trait because readonly 
+    // properties cannot be initialized in base classes
     protected function hydrateProperties()
     {
         foreach ($this->data as $key => $value) {
