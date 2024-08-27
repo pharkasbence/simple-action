@@ -16,10 +16,10 @@ class CreateUserData extends ActionData
 {
     use HydratesProperties;
 
-    protected string $email;
-    protected string $username;
-    protected string $password;
-    protected ?string $phoneNumber;
+    public readonly string $email;
+    public readonly string $username;
+    public readonly string $password;
+    public readonly ?string $phoneNumber;
 
     public function __construct(array $data)
     {
