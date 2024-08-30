@@ -42,7 +42,7 @@ class CreateUserData extends ActionData
     // optional
     protected function validationMessages(): array
     {
-        'password' => 'Passwords must be at least 6 characters in length',
+        'password' => 'Password must be at least 6 characters in length',
     }
 }
 ```
