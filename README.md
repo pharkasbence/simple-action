@@ -59,8 +59,6 @@ use App\Models\User;
 
 class CreateUser extends Action
 {
-    public function __construct(/*  */) {}
-
     public function handle(CreateUserData $data): User
     {
         $passwordHash = Hash::make($data->password);
